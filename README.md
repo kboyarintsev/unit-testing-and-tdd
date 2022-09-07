@@ -1,3 +1,24 @@
+Словарь
+===========================
+Surefire - plugin maven для запуска тестов
+SUT - system/subject under test
+BDD - behavior driven design
+Test Fixture - набор тестовых кейсов/данных
+Golden Copy - эталонный объект с проверенным поведением
+Cyclomatic complexity (цикломатическая сложность) - количество ветвлений кода
+Cohesion - связанность методов внутри объекта
+Класс эквивалентности - набор данных, которые приводят к одной ветке
+
+JUnit:
+-------------
+org.junit.jupiter.api.Assumptions - проверка условий, если не проходят пред. условия - тест дисейблится, что хрен кто увидит
+org.junit.jupiter.api.Assertions - проверка результата от junit
+Состояния тестов JUnit:
+  - ок
+  - disable - либо сами выключили либо не прошли assumptions
+  - failure - не прошли assertions
+  - error - упало исполнение
+
 Тренинг «Unit Testing & TDD»
 ============================
 24 ак. часа, 18 астр. часов
