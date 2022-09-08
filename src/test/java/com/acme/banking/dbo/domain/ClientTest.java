@@ -1,7 +1,11 @@
 package com.acme.banking.dbo.domain;
 
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class ClientTest {
 
@@ -11,88 +15,38 @@ class ClientTest {
         Client sut = new Client(1, "dummy name");
 
         // Then
-        Assertions.assertNotNull(sut);
-        Assertions.assertEquals(1, sut.getId());
-        Assertions.assertEquals("dummy name", sut.getName());
+        MatcherAssert.assertThat(sut,
+                Matchers.allOf(
+                        Matchers.notNullValue(),
+                        Matchers.hasProperty("id", Matchers.equalTo(1)),
+                        Matchers.hasProperty("name", Matchers.equalTo("dummy name"))
+                )
+        );
     }
 
-    @Test
-    public void shouldThrowExceptionWhenIdIsZero() {
-        //Given
-        Client sut;
-
-        // When
-        try {
-            sut = new Client(0, "dummy name");
-        } catch (IllegalArgumentException e) {
-            sut = null;
-        }
-
-        // Then
-        Assertions.assertNull(sut);
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, -100, Integer.MIN_VALUE})
+    public void shouldShowErrorWhenIdIsNotValid(int invalidId) {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Client(invalidId, "dummy name")
+        );
     }
 
-    @Test
-    public void shouldThrowExceptionWhenIdIsNegative() {
-        //Given
-        Client sut;
-
-        // When
-        try {
-            sut = new Client(-1, "dummy name");
-        } catch (IllegalArgumentException e) {
-            sut = null;
-        }
-
-        // Then
-        Assertions.assertNull(sut);
+    @ParameterizedTest
+    @ValueSource(strings = {"", "TooLongStringTooLongStringTooLongStringTooLongStringTooLongStringTooLongStringTooLongString"})
+    public void shouldErrorWhenNameIsNotCorrect(String name) {
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Client(1, name)
+        );
     }
 
     @Test
     public void shouldThrowExceptionWhenNameIsNull() {
-        //Given
-        Client sut;
-
-        // When
-        try {
-            sut = new Client(1, null);
-        } catch (IllegalArgumentException e) {
-            sut = null;
-        }
-
-        // Then
-        Assertions.assertNull(sut);
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenNameIsEmpty() {
-        //Given
-        Client sut;
-
-        // When
-        try {
-            sut = new Client(1, "");
-        } catch (IllegalArgumentException e) {
-            sut = null;
-        }
-
-        // Then
-        Assertions.assertNull(sut);
-    }
-
-    @Test
-    public void shouldThrowExceptionWhenNameIsToLong() {
-        //Given
-        Client sut;
-
-        // When
-        try {
-            sut = new Client(1, "aksdfkjaslkfjksjfoksjakfjsdkfjasdjfjas;djfasjdfkjaskjfkasjkdfjkasjdfkl;jsakfjkasjdfkkjsadkfljsla");
-        } catch (IllegalArgumentException e) {
-            sut = null;
-        }
-
-        // Then
-        Assertions.assertNull(sut);
+        Assertions.assertThrows(
+                IllegalArgumentException.class,
+                () -> new Client(1, null)
+        );
     }
 }

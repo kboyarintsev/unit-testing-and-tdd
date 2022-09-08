@@ -1,22 +1,20 @@
 package com.acme.banking.dbo;
 
 import com.acme.banking.dbo.domain.Client;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertAll;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assumptions.*;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.beans.HasPropertyWithValue.hasProperty;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 
 @DisplayName("Test suite")
 public class ClientTest {
-    @Test @Disabled("temporary disabled")
+    @Test //@Disabled("temporary disabled")
     @DisplayName("Test case")
     public void shouldStorePropertiesWhenCreated() {
         //region given
