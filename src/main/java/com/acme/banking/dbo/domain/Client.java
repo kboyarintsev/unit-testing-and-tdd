@@ -28,4 +28,8 @@ public class Client {
     public String getName() {
         return name;
     }
+
+    public Collection<Account> getAccounts() {
+        return accounts;
+    }
 }

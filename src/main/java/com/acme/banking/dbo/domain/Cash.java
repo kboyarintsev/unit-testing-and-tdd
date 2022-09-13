@@ -1,7 +1,7 @@
 package com.acme.banking.dbo.domain;
 
 public class Cash {
-    public static void log(double amount, int fromAccountId) {
-        //TODO
+    public void log(double amount, int fromAccountId) {
+        System.out.println("Выдано " + amount + " со счёт " + fromAccountId);
     }
 }
